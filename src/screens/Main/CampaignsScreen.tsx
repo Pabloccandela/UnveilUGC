@@ -96,11 +96,10 @@ const CampaignsScreen: React.FC = () => {
   };
 
   // Obtener el nombre del negocio a partir del businessId
-  const getBusinessName = (businessId: string): string => {
-    const offer = offers.find(offer => offer.businessId === businessId);
-    return offer ? offer.businessName : 'Negocio desconocido';
+  const getBusinessById = (businessId: string): Offer | undefined => {
+    return offers.find(offer => offer.businessId === businessId);
   };
-
+  
   // Renderizar cada elemento de campaña
   const renderCampaignItem = ({ item }: { item: Campaign }) => (
     <TouchableOpacity 
@@ -108,15 +107,14 @@ const CampaignsScreen: React.FC = () => {
       onPress={() => navigation.navigate('CampaignDetails', { campaignId: item.id })}
     >
       <View style={styles.campaignHeader}>
-        <Text style={styles.campaignBusiness}>{getBusinessName(item.businessId)}</Text>
+        <Text style={styles.campaignBusiness}>{getBusinessById(item.businessId)?.businessName}</Text>
         <View style={[styles.statusTag, { backgroundColor: getStatusColor(item.status) }]}>
           <Text style={styles.statusText}>{getStatusText(item.status)}</Text>
         </View>
       </View>
       
       <View style={styles.campaignDetails}>
-        <Text style={styles.detailLabel}>Negocio:</Text>
-        <Text style={styles.detailValue}>{getBusinessName(item.businessId)}</Text>
+        <Text style={styles.detailValue}>{getBusinessById(item.businessId)?.title}</Text>
       </View>
       
       <View style={styles.campaignDetails}>
@@ -244,6 +242,7 @@ const styles = StyleSheet.create({
   campaignDetails: {
     flexDirection: 'row',
     marginBottom: 8,
+    width: '100%',
   },
   detailLabel: {
     fontSize: 14,
@@ -254,7 +253,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
     fontWeight: '500',
-    width: '60%',
+    width: '100%',
   },
   campaignFooter: {
     marginTop: 12,
