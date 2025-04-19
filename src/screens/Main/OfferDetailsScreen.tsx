@@ -23,6 +23,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 type OfferDetailsRouteProp = RouteProp<MainStackParamList, 'OfferDetails'>;
 type OfferDetailsNavigationProp = NativeStackNavigationProp<MainStackParamList, 'OfferDetails'>;
 
+import notificationService from '../../services/notificationService';
 // Pantalla de detalles de una oferta
 // Permite ver información y proponer fechas para la campaña
 const OfferDetailsScreen: React.FC = () => {
@@ -128,6 +129,19 @@ const OfferDetailsScreen: React.FC = () => {
         proposedDates
       );
       
+      // Notificación push local según respuesta
+      if (response.accepted) {
+        notificationService.showLocalNotification(
+          '¡Propuesta aceptada!',
+          'Tu propuesta para la campaña fue aceptada. Revisa los detalles en la app.'
+        );
+      } else {
+        notificationService.showLocalNotification(
+          'Propuesta rechazada',
+          'Tu propuesta para la campaña fue rechazada. ¡Sigue intentando con otras ofertas!'
+        );
+      }
+
       // Show response modal
       setResponseModal({
         visible: true,
