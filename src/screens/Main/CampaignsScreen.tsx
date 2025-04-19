@@ -108,7 +108,7 @@ const CampaignsScreen: React.FC = () => {
       onPress={() => navigation.navigate('CampaignDetails', { campaignId: item.id })}
     >
       <View style={styles.campaignHeader}>
-        <Text style={styles.campaignId}>Campaña #{item.id}</Text>
+        <Text style={styles.campaignBusiness}>{getBusinessName(item.businessId)}</Text>
         <View style={[styles.statusTag, { backgroundColor: getStatusColor(item.status) }]}>
           <Text style={styles.statusText}>{getStatusText(item.status)}</Text>
         </View>
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
-  campaignId: {
+  campaignBusiness: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',

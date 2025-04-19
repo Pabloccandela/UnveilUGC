@@ -158,19 +158,25 @@ Esto permite al usuario estar informado en tiempo real sobre el estado de sus ap
 
 ```
 UnveilUGC/
-├── assets/                 # Recursos estáticos (imágenes, fuentes)
-├── components/             # Componentes reutilizables
-├── context/                # Contextos de React (AuthContext)
+├── assets/                      # Recursos estáticos (imágenes, fuentes)
 ├── src/
-│   ├── hooks/              # Custom hooks
-│   ├── models/             # Definiciones de tipos e interfaces
-│   ├── navigation/         # Configuración de navegación
-│   ├── screens/            # Pantallas de la aplicación
-│   │   ├── Auth/           # Pantallas de autenticación
-│   │   ├── Main/           # Pantallas principales
-│   │   └── Onboarding/     # Pantallas de onboarding
-│   └── services/           # Servicios y lógica de negocio
-├── App.tsx                 # Punto de entrada de la aplicación
-├── package.json            # Dependencias del proyecto
-└── README.md               # Documentación
+│   ├── components/              # Componentes reutilizables (BottomNavBar, LoadingScreen, etc.)
+│   ├── context/                 # Contextos de React (AuthContext)
+│   ├── hooks/                   # Custom hooks (useAuth, useOffers)
+│   ├── models/                  # Definiciones de tipos e interfaces (Offer, User)
+│   ├── navigation/              # Navegación (AppNavigator, Stacks, types)
+│   ├── screens/                 # Pantallas de la aplicación
+│   │   ├── Auth/                # Login y registro
+│   │   │   └── Register/        # Onboarding multi-paso
+│   │   ├── Main/                # Dashboard, Ofertas, Campañas, Perfil
+│   ├── services/                # Lógica de negocio (matchingService, mockData, notificationService)
+│   └── utils/                   # Utilidades (platformStyles, validation)
+├── App.tsx                      # Punto de entrada de la aplicación
+├── package.json                 # Dependencias del proyecto
+└── README.md                    # Documentación
 ```
+
+- Todos los archivos principales y subcarpetas relevantes están bajo `src/` para una mejor organización.
+- Las notificaciones locales están implementadas en `src/services/notificationService.ts`.
+- Los componentes reutilizables se encuentran en `src/components/`.
+- Las pantallas principales están en `src/screens/Main/` y las de autenticación/onboarding en `src/screens/Auth/`.
