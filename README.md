@@ -2,6 +2,12 @@
 
 Unveil es una aplicación móvil para conectar creadores de contenido (UGC) con negocios locales mediante campañas colaborativas.
 
+## Recursos
+
+- **PDF**: Se encuentra ubicado en la carpeta raíz, nombre: `DOCUMENTO_TECNICO_UNVEIL_UGC_PLATFORM.pdf`
+- **Video Muestra**: https://drive.google.com/file/d/1Up99OAvN1Kh20w7yBgxfeORCrSSRFk2p/view?usp=sharing
+
+
 ## Tecnología utilizada
 - **React Native** + **TypeScript**: Permite desarrollo multiplataforma (Android/iOS) con tipado fuerte y componentes reutilizables.
 - **Context API**: Para manejo de estado global (usuario, onboarding, autenticación).
@@ -180,3 +186,4 @@ UnveilUGC/
 - Las notificaciones locales están implementadas en `src/services/notificationService.ts`.
 - Los componentes reutilizables se encuentran en `src/components/`.
 - Las pantallas principales están en `src/screens/Main/` y las de autenticación/onboarding en `src/screens/Auth/`.
+
