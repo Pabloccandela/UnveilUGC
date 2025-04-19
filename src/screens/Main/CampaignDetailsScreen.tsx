@@ -201,7 +201,7 @@ const CampaignDetailsScreen: React.FC = () => {
 
       <ScrollView style={styles.scrollContainer} contentContainerStyle={styles.contentContainer}>
         <View style={styles.campaignHeader}>
-          <Text style={styles.campaignId}>Campaña #{campaign.id}</Text>
+          <Text style={styles.campaignId}>#{campaign.id}</Text>
           <View style={[styles.statusTag, { backgroundColor: getStatusColor(campaign.status) }]}>
             <Text style={styles.statusText}>{getStatusText(campaign.status)}</Text>
           </View>
