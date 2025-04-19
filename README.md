@@ -129,6 +129,13 @@ La lógica principal está en `src/services/matchingService.ts`. Si quieres camb
 
 4. Usar Expo Go en un dispositivo móvil o un emulador para visualizar la aplicación
 
+## Ramas Dev - Origin/Master
+
+- **Dev**: Rama de desarrollo activa
+- **Origin/Master**: Rama principal (master)
+
+- En este caso es un proyecto de prueba y las ramas son similares en contenido, pero es importante tener un control de versiones usando ramas de desarrollo y rama principal. 
+
 ## Mejoras Futuras
 
 - Implementación de backend real con Firebase o similar
