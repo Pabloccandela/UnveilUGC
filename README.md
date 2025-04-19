@@ -8,6 +8,15 @@ Unveil es una aplicación móvil para conectar creadores de contenido (UGC) con 
 - **Navegación**: React Navigation para gestionar pantallas y flujos.
 - **Datos mock**: Toda la lógica y datos se simulan localmente, sin backend real.
 
+### Versiones de herramientas principales
+
+- **expo**: ~52.0.43
+- **react-native**: 0.76.9
+- **react**: 18.3.1
+- **typescript**: ^5.3.3
+
+> Consulta `package.json` para la lista completa de dependencias y sus versiones.
+
 ## Sistema de Matching
 El sistema de matching filtra y ordena ofertas para cada creador según:
 - Nivel del creador (ej: Principiante)
