@@ -1,16 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MainStackParamList } from '../navigation/type';
+import { MaterialIcons } from '@expo/vector-icons';
+// Si tienes instalada la librería:
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-type BottomNavBarProps = {
-  // Puedes añadir props adicionales si es necesario
-};
+// Fallback manual si no tienes la librería:
+const useSafeAreaInsets = () => ({ bottom: Platform.OS === 'ios' ? 20 : 16 });
 
-const BottomNavBar: React.FC<BottomNavBarProps> = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
+import { useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { MainStackParamList } from '../navigation/type';
+
+const BottomNavBar: React.FC = () => {
+  const insets = useSafeAreaInsets();
   const route = useRoute();
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
 
   // Determinar la ruta activa
   const isActive = (routeName: keyof MainStackParamList) => {
@@ -18,14 +23,17 @@ const BottomNavBar: React.FC<BottomNavBarProps> = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingBottom: insets.bottom, backgroundColor: '#fff' }]}>
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigation.navigate('Dashboard')}
       >
         <View style={[styles.iconContainer, isActive('Dashboard') && styles.activeIconContainer]}>
-          {/* Aquí podrías añadir un icono */}
-          <Text style={[styles.iconText, isActive('Dashboard') && styles.activeIconText]}>🏠</Text>
+          <MaterialIcons
+            name="home"
+            size={24}
+            color={isActive('Dashboard') ? '#4CAF50' : '#666'}
+          />
         </View>
         <Text style={[styles.navText, isActive('Dashboard') && styles.activeNavText]}>Inicio</Text>
       </TouchableOpacity>
@@ -35,8 +43,11 @@ const BottomNavBar: React.FC<BottomNavBarProps> = () => {
         onPress={() => navigation.navigate('Profile')}
       >
         <View style={[styles.iconContainer, isActive('Profile') && styles.activeIconContainer]}>
-          {/* Aquí podrías añadir un icono */}
-          <Text style={[styles.iconText, isActive('Profile') && styles.activeIconText]}>👤</Text>
+          <MaterialIcons
+            name="person"
+            size={24}
+            color={isActive('Profile') ? '#4CAF50' : '#666'}
+          />
         </View>
         <Text style={[styles.navText, isActive('Profile') && styles.activeNavText]}>Perfil</Text>
       </TouchableOpacity>
@@ -46,8 +57,11 @@ const BottomNavBar: React.FC<BottomNavBarProps> = () => {
         onPress={() => navigation.navigate('Campaigns')}
       >
         <View style={[styles.iconContainer, isActive('Campaigns') && styles.activeIconContainer]}>
-          {/* Aquí podrías añadir un icono */}
-          <Text style={[styles.iconText, isActive('Campaigns') && styles.activeIconText]}>📋</Text>
+          <MaterialIcons
+            name="list-alt"
+            size={24}
+            color={isActive('Campaigns') ? '#4CAF50' : '#666'}
+          />
         </View>
         <Text style={[styles.navText, isActive('Campaigns') && styles.activeNavText]}>Campañas</Text>
       </TouchableOpacity>

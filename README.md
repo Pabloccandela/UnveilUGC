@@ -27,6 +27,15 @@ La lógica principal está en `src/services/matchingService.ts`. Si quieres camb
 
 ## Flujo básico de la aplicación
 
+### Notificaciones Locales
+La app utiliza notificaciones locales (implementadas con `expo-notifications`) para informar al usuario cuando una propuesta de campaña es **aceptada** o **rechazada**. Estas notificaciones aparecen inmediatamente después de que el usuario envía una solicitud y recibe la respuesta.
+
+- Si la propuesta es aceptada: se muestra una notificación indicando el éxito.
+- Si la propuesta es rechazada: se muestra una notificación informando el rechazo.
+
+Esto permite al usuario estar informado en tiempo real sobre el estado de sus aplicaciones a campañas.
+
+
 ### 1. Login y Registro
 - El usuario puede registrarse como creador completando un formulario (nombre, email, contraseña, país, ciudad y otros, mediante un proceso de onboarding).
 - El login verifica los datos y accede al dashboard.
@@ -128,6 +137,13 @@ La lógica principal está en `src/services/matchingService.ts`. Si quieres camb
    ```
 
 4. Usar Expo Go en un dispositivo móvil o un emulador para visualizar la aplicación
+
+## Ramas Dev - Origin/Master
+
+- **Dev**: Rama de desarrollo activa
+- **Origin/Master**: Rama principal (master)
+
+- En este caso es un proyecto de prueba y las ramas son similares en contenido, pero es importante tener un control de versiones usando ramas de desarrollo y rama principal. 
 
 ## Mejoras Futuras
 

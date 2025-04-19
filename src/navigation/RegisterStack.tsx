@@ -17,10 +17,10 @@ export default function RegisterStack() {
         animation: 'slide_from_right'
       }}
     >
-      <Stack.Screen name="Step1" component={Step1Screen} />
-      <Stack.Screen name="Step2" component={Step2Screen} />
-      <Stack.Screen name="Step3" component={Step3Screen} />
-      <Stack.Screen name="Step4" component={Step4Screen} />
+      <Stack.Screen name="Step1" component={Step1Screen} options={{ animation: 'slide_from_right' }}/>
+      <Stack.Screen name="Step2" component={Step2Screen} options={{ animation: 'slide_from_right' }}/>
+      <Stack.Screen name="Step3" component={Step3Screen} options={{ animation: 'slide_from_right' }}/>
+      <Stack.Screen name="Step4" component={Step4Screen} options={{ animation: 'slide_from_right' }}/>
     </Stack.Navigator>
   );
 }

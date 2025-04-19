@@ -11,12 +11,12 @@ export default function AuthStack() {
     <Stack.Navigator
       initialRouteName="Login"
       screenOptions={{
-        animation: 'slide_from_right',
+        animation: 'slide_from_left',
         headerShown: false
       }}
     >
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Register" component={RegisterStack} options={{ animation: 'fade' }} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{ animation: 'slide_from_left' }}/>
+      <Stack.Screen name="Register" component={RegisterStack} options={{ animation: 'slide_from_right' }} />
     </Stack.Navigator>
   );
 }
