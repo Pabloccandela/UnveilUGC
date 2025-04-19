@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { User, UserRole, SocialMediaProfile } from '../src/models/User';
 import { MOCK_USERS } from '../src/services/mockData';
@@ -34,7 +34,7 @@ interface AuthContextType {
   hasCompletedOnboarding: boolean;
   isLoading: boolean;
   login: (user: User) => Promise<void>;
-  register: (registrationData: { email: string; password: string; role: UserRole }) => Promise<void>;
+  register: (registrationData: { email: string; password: string; fullName: string; country: string; city: string }) => Promise<void>;
   updateUser: (userData: Partial<User>) => void;
   logout: () => void;
   completeOnboarding: () => void;
@@ -80,19 +80,19 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   };
 
   // Mock register function
-  const register = async (registrationData: { email: string; password: string; role: UserRole }): Promise<void> => {
+  const register = async (registrationData: { email: string; password: string; fullName: string; country: string; city: string }): Promise<void> => {
     setIsLoading(true);
     try {
       // Simulación de registro
       if (registrationData.email && registrationData.password) {
         const tempUser: User = {
           id: Math.random().toString(),
-          fullName: '',
+          fullName: registrationData.fullName || '',
           password: registrationData.password,
           email: registrationData.email,
-          role: registrationData.role,
-          country: '',
-          city: '',
+          role: 'creator',
+          country: registrationData.country || '',
+          city: registrationData.city || '',
           socialMedia: [],
           stats: {
             campaigns: 0,
@@ -110,11 +110,11 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
         // Inicializar los datos de onboarding
         const initialOnboardingData: OnboardingData = {
           step1: {
-            fullName: '',
+            fullName: registrationData.fullName || '',
             email: registrationData.email,
             password: registrationData.password,
-            country: '',
-            city: '',
+            country: registrationData.country || '',
+            city: registrationData.city || '',
           },
           step2: {
             socialMedia: [],
@@ -159,7 +159,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   };
 
   // Cargar datos del AsyncStorage al iniciar
-  React.useEffect(() => {
+  useEffect(() => {
     const loadData = async () => {
       try {
         const [savedUser, savedOnboardingData, savedHasCompletedOnboarding] = await Promise.all([
@@ -186,7 +186,7 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   }, []);
 
   // Guardar datos en AsyncStorage cuando cambien
-  React.useEffect(() => {
+  useEffect(() => {
     const saveData = async () => {
       try {
         const promises = [];
@@ -235,6 +235,10 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
 
   const updateOnboardingData = (step: keyof OnboardingData, data: any) => {
     if (onboardingData) {
+      console.log(onboardingData)
+      console.log(step)
+      console.log(data)
+
       setOnboardingData({
         ...onboardingData,
         [step]: {

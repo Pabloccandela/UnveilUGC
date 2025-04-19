@@ -39,6 +39,10 @@ const Step2Screen = () => {
   const navigation = useNavigation<RegisterNavigationProp>();
   const { onboardingData, updateOnboardingData } = useAuth();
 
+  useEffect(() => {
+    console.log(onboardingData);
+  }, [onboardingData, navigation]);
+
   // Form state
   const [profiles, setProfiles] = useState<SocialMediaProfile[]>(
     onboardingData?.step2?.socialMedia
@@ -160,7 +164,7 @@ const Step2Screen = () => {
       socialMedia,
       stats: {
         campaigns: 0,
-        reviews: '0',
+        reviews: [],
         level: 'Principiante'
       }
     });

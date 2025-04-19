@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getPasswordValidationErrors } from '../utils/validation';
 
 interface PasswordInputProps {
   value: string;
@@ -14,21 +16,7 @@ export const PasswordInput = ({ value, onChangeText, error, placeholder = 'Contr
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   const validatePassword = (password: string) => {
-    const errors: string[] = [];
-    
-    if (!/[A-Z]/.test(password)) {
-      errors.push('Al menos una letra mayúscula');
-    }
-    if (!/[a-z]/.test(password)) {
-      errors.push('Al menos una letra minúscula');
-    }
-    if (!/[0-9]/.test(password)) {
-      errors.push('Al menos un número');
-    }
-    if (password.length < 8) {
-      errors.push('Mínimo 8 caracteres');
-    }
-
+    const errors = getPasswordValidationErrors(password);
     setValidationErrors(errors);
     return errors.length === 0;
   };
@@ -38,11 +26,12 @@ export const PasswordInput = ({ value, onChangeText, error, placeholder = 'Contr
     validatePassword(text);
   };
 
+
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
+      <View style={[styles.inputContainer, error? styles.inputError : null]}>
         <TextInput
-          style={[styles.input, error ? styles.inputError : null]}
+          style={styles.input}
           value={value}
           onChangeText={handleChangeText}
           placeholder={placeholder}
@@ -54,24 +43,14 @@ export const PasswordInput = ({ value, onChangeText, error, placeholder = 'Contr
           onPress={() => setShowPassword(!showPassword)}
         >
           <Icon
-            name={showPassword ? 'eye-off' : 'eye'}
+            name={!showPassword ? 'eye-off' : 'eye'}
             size={24}
             color="#666"
           />
         </TouchableOpacity>
       </View>
       
-      {validationErrors.length > 0 && (
-        <View style={styles.validationContainer}>
-          {validationErrors.map((err, index) => (
-            <Text key={index} style={styles.validationText}>
-              • {err}
-            </Text>
-          ))}
-        </View>
-      )}
-      
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {(validationErrors.length > 0 || !!error) && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 };
@@ -97,6 +76,7 @@ const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: '#ff6b6b',
+    borderWidth: 1,
   },
   eyeIcon: {
     position: 'absolute',
@@ -109,13 +89,13 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   validationText: {
-    color: '#666',
+    color: '#ff6b6b',
     fontSize: 12,
     marginBottom: 4,
   },
   errorText: {
     color: '#ff6b6b',
     fontSize: 12,
-    marginTop: 5,
+    marginStart: 10,
   },
 });

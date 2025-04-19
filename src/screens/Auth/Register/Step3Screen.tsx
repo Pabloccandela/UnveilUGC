@@ -22,9 +22,9 @@ type RegisterNavigationProp = NativeStackNavigationProp<RegisterStackParamList, 
 
 const Step3Screen = () => {
   // Hooks de navegación y contexto de usuario
-
   const navigation = useNavigation<RegisterNavigationProp>();
   const { onboardingData, updateOnboardingData } = useAuth();
+
   // Estado para almacenar los intereses seleccionados y mensajes de error
   const [selectedInterests, setSelectedInterests] = useState<string[]>(
     onboardingData?.step3?.interests || []

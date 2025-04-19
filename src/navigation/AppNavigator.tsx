@@ -2,13 +2,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './AuthStack';
-import RegisterStack from './RegisterStack';
 import MainStack from './MainStack';
 import { useAuth } from '../../context/UserContext';
 import { RootStackParamList } from './type';
 import LoadingScreen from '../components/LoadingScreen';
 import ErrorBoundaryScreen from '../components/ErrorBoundaryScreen';
-import { View } from 'react-native';
+
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -35,7 +34,7 @@ export default function AppNavigator() {
           headerShown: false,
         }}
       >
-        {hasCompletedOnboarding?
+        {user && hasCompletedOnboarding?
           <RootStack.Screen name="Main" component={MainStack} />
           :
           <RootStack.Screen name="Auth" component={AuthStack} />
